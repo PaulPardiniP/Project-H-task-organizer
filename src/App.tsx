@@ -6,6 +6,7 @@ import { useAuth } from "./features/auth/authenticator";
 import { useTasks } from "./hooks/useTasks";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import SendSummaryButton from "./components/SendSummaryButton";
 
 function DashboardPage() {
   const { user, logout } = useAuth();
@@ -20,6 +21,7 @@ function DashboardPage() {
       </header>
 
       <TodoForm userId={user?.uid || ""} />
+      <SendSummaryButton tasks={tasks} email={user?.email || ""} />
 
       {loading && <p>Cargando tareas...</p>}
       {error && <p role="alert">{error}</p>}

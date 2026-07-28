@@ -25,10 +25,11 @@ export function useTasks(uid: string) {
     setTasks(data);
     setLoading(false);
   },
-  (err) => {
-    setError("No se pudieron obtener las tareas.");
-    setLoading(false);
-  }
+(err) => {
+  console.error("Error al obtener tareas:", err);
+  setError("No se pudieron obtener las tareas.");
+  setLoading(false);
+}
 );
 
     return () => unsubscribe();
