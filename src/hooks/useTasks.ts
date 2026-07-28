@@ -18,7 +18,6 @@ export function useTasks(uid: string) {
    const unsubscribe = onSnapshot(
   q,
   (snapshot) => {
-    console.log("SNAPSHOT DOCS:", snapshot.docs.length);
     const data = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...(doc.data() as Omit<Task, "id">),
@@ -27,7 +26,6 @@ export function useTasks(uid: string) {
     setLoading(false);
   },
   (err) => {
-    console.log("ERROR FIRESTORE:", err);
     setError("No se pudieron obtener las tareas.");
     setLoading(false);
   }
