@@ -111,9 +111,37 @@ En Vercel, estas 10 variables se configuran en **Project Settings → Environmen
 4. La Vercel Function valida el payload, arma el `SendEmailCommand` y llama a AWS SES usando las credenciales guardadas como variables de entorno del servidor.
 5. La función responde con éxito o error; el frontend muestra el estado correspondiente (loading / success / error) y lo oculta automáticamente después de unos segundos.
 
-## Capturas del programa en línea funcionando
+## Capturas en diseño responsive
 
+### Home
+<img src="doc/screenshots/Funcionamiento/home-mobile.jpg" width="300">
 
+### Registrarse
+<img src="doc/screenshots/Funcionamiento/registrarse-mobile.jpg" width="300">
+
+### Vista desde la PC
+<img src="doc/screenshots/Funcionamiento/vista-pc-task.png" width="500">
+
+### Interfaz de tareas en negro
+<img src="doc/screenshots/Funcionamiento/black-mobile.jpg" width="300">
+
+### Interfaz de tareas en blanco
+<img src="doc/screenshots/Funcionamiento/white-mobile.jpg" width="300">
+
+### Tarea creada - tema negro
+<img src="doc/screenshots/Funcionamiento/tasks-mobile-black.jpg" width="300">
+
+### Tarea creada - tema blanco
+<img src="doc/screenshots/Funcionamiento/tasks-mobile.jpg" width="300">
+
+### Resumen enviado al email
+<img src="doc/screenshots/Funcionamiento/email-enviado.jpg" width="300">
+
+### Buzón de entrada de emails
+<img src="doc/screenshots/Funcionamiento/emails-bandeja.jpg" width="300">
+
+### Email recibido
+<img src="doc/screenshots/Funcionamiento/email-task.jpg" width="300">
 
 ## Uso de IA en el proceso de trabajo
 
@@ -128,8 +156,20 @@ Todo el desarrollo del proyecto se hizo con acompañamiento constante de Claude 
 
 **Dónde la IA cometió errores que hubo que corregir:** hubo varios tramos de la sesión (especialmente en el ajuste de estilos CSS y en la resolución de conflictos de capitalización de nombres de archivo en Windows) donde las primeras respuestas de la IA no acertaron con la causa real del problema, y se necesitaron varias iteraciones con capturas de pantalla y mensajes de error reales hasta encontrar la causa exacta. Esto reforzó la importancia de verificar cada cambio en el navegador antes de asumir que una sugerencia era correcta, y de pedir explicaciones del "por qué" de cada fix en vez de aplicar cambios a ciegas.
 
+Ejemplos
+
+<img src="doc/screenshots/IA/ia-falla.jpg" width="500">
+
+<img src="doc/screenshots/IA/ia-falla2.jpg" width="500">
+
+
 **Buenas prácticas descubiertas a partir de este proceso:**
 - Pedir el código completo mínimo necesario, no archivos enteros reescritos, para poder revisar exactamente qué cambia.
 - Verificar en la consola del navegador y en la pestaña de Red antes de asumir una causa de un bug.
 - Separar claramente en la conversación qué es una sugerencia de la IA y qué es una decisión propia ya validada, para no repetir errores ya corregidos.
 
+<img src="doc/screenshots/IA/ia-comprension.jpg" width="500">
+
+<img src="doc/screenshots/IA/ia-comprension2.jpg" width="500">
+
+<img src="doc/screenshots/IA/ia-comprension3.jpg" width="500">
