@@ -47,7 +47,7 @@ return (
       <form onSubmit={handleSubmit} className="form-row">
         <h2>Crear cuenta</h2>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mínimo 6 caracteres" required minLength={6} />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password min 6 caracteres" required minLength={6} />
         {error && <p className="alert-error" role="alert">{error}</p>}
         <div className="task-actions">
           <button type="submit" disabled={submitting}>{submitting ? "Creando..." : "Registrarse"}</button>
