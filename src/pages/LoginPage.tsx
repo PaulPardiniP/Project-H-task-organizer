@@ -1,8 +1,8 @@
 // src/pages/LoginPage.tsx
 import { useState } from "react";
-import type { FormEvent, JSX } from "react";
-import { useAuth } from "../features/auth/authenticator";
-import { getAuthErrorMessage } from "../features/auth/authErrors";
+import type { SyntheticEvent, JSX } from "react";
+import { useAuth } from "../features/auth/Authenticator";
+import { getAuthErrorMessage } from "../features/auth/AuthErrors";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 interface LocationState {
@@ -15,14 +15,14 @@ function LoginPage(): JSX.Element {
   const location = useLocation();
   const state = location.state as LocationState | null;
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
-  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const destino = state?.from?.pathname || "/dashboard";
 
-  async function handleSubmit(e: FormEvent): Promise<void> {
+  async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     setError("");
     setSubmitting(true);
@@ -36,7 +36,7 @@ function LoginPage(): JSX.Element {
     }
   }
 
-  async function handleGoogleLogin(): Promise<void> {
+  async function handleGoogleLogin() {
     setError("");
     setSubmitting(true);
     try {
@@ -50,43 +50,38 @@ function LoginPage(): JSX.Element {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Iniciar sesión</h2>
+    <div className="app-shell">
+      <div className="auth-card">
+      <form onSubmit={handleSubmit} className="form-row">
+        <h2>Iniciar sesión</h2>
 
-      <label>
-        Email
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
+        <label className="form-row">
+          Email
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </label>
 
-      <label>
-        Contraseña
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
+        <label className="form-row">
+          Contraseña
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        </label>
 
-      {error && <p role="alert" style={{ color: "red" }}>{error}</p>}
+        {error && <p className="alert-error" role="alert">{error}</p>}
 
-      <button type="submit" disabled={submitting}>
-        {submitting ? "Ingresando..." : "Iniciar sesión"}
-      </button>
+        <div className="task-actions">
+          <button type="submit" disabled={submitting}>
+            {submitting ? "Ingresando..." : "Iniciar sesión"}
+          </button>
+          <button type="button" className="secondary" onClick={handleGoogleLogin} disabled={submitting}>
+            Ingresar con Google
+          </button>
+        </div>
 
-      <button type="button" onClick={handleGoogleLogin} disabled={submitting}>
-        Ingresar con Google
-      </button>
-
-      <p>
-        ¿No tenés cuenta? <Link to="/register">Registrate</Link>
-      </p>
-    </form>
+        <p className="muted">
+          ¿No tenés cuenta? <Link to="/register">Registrate</Link>
+        </p>
+      </form>
+    </div>
+    </div>
   );
 }
 

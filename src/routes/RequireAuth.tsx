@@ -1,5 +1,5 @@
 // src/routes/RequireAuth.tsx
-import { useAuth } from "../features/auth/authenticator";
+import { useAuth } from "../features/auth/Authenticator";
 import { Navigate, useLocation } from "react-router-dom";
 import type { ReactNode, JSX } from "react";
 

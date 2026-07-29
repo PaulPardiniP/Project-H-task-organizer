@@ -8,8 +8,12 @@ interface TodoListProps {
 }
 
 function TodoList({ tasks }: TodoListProps) {
-  if (tasks.length === 0) return <p>No tenés tareas todavía.</p>;
-  return <ul>{tasks.map((task) => <TodoItem key={task.id} task={task} />)}</ul>;
+  if (tasks.length === 0) return <p className="muted">No tenés tareas todavía.</p>;
+  return (
+    <ul className="task-list">
+      {tasks.map((task) => <TodoItem key={task.id} task={task} />)}
+    </ul>
+  );
 }
 
 function TodoItem({ task }: { task: Task }) {
@@ -37,22 +41,36 @@ function TodoItem({ task }: { task: Task }) {
 
   if (editing) {
     return (
-      <li>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} disabled={busy} />
-        <input value={description} onChange={(e) => setDescription(e.target.value)} disabled={busy} />
-        <button onClick={handleSaveEdit} disabled={busy || !title.trim()}>Guardar</button>
-        <button type="button" onClick={() => setEditing(false)} disabled={busy}>Cancelar</button>
+      <li className="task-card">
+        <div className="form-row">
+          <input value={title} onChange={(e) => setTitle(e.target.value)} disabled={busy} />
+          <input value={description} onChange={(e) => setDescription(e.target.value)} disabled={busy} />
+        </div>
+        <div className="task-actions">
+          <button onClick={handleSaveEdit} disabled={busy || !title.trim()}>Guardar</button>
+          <button type="button" className="secondary" onClick={() => setEditing(false)} disabled={busy}>Cancelar</button>
+        </div>
       </li>
     );
   }
 
   return (
-    <li>
-      <input type="checkbox" checked={task.completed} onChange={handleToggle} disabled={busy} />
-      <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>{task.title}</span>
-      {task.description && <p>{task.description}</p>}
-      <button type="button" onClick={() => setEditing(true)} disabled={busy}>Editar</button>
-      <button type="button" onClick={handleDelete} disabled={busy}>Eliminar</button>
+    <li className="task-card">
+      <div className="task-card-top">
+        <button
+        type="button"
+        className={`task-led ${task.completed ? "completed" : ""}`}
+        onClick={handleToggle}
+        disabled={busy}
+        aria-label={task.completed ? "Marcar como pendiente" : "Marcar como completada"}
+      />
+        <span className={`task-title ${task.completed ? "completed" : ""}`}>{task.title}</span>
+      </div>
+      {task.description && <p className="task-description">{task.description}</p>}
+      <div className="task-actions">
+        <button type="button" className="secondary" onClick={() => setEditing(true)} disabled={busy}>Editar</button>
+        <button type="button" className="danger" onClick={handleDelete} disabled={busy}>Eliminar</button>
+      </div>
     </li>
   );
 }

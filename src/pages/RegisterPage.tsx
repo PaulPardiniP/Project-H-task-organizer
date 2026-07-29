@@ -1,8 +1,8 @@
 // src/pages/RegisterPage.tsx
 import { useState } from "react";
-import type { FormEvent, JSX } from "react";
-import { useAuth } from "../features/auth/authenticator";
-import { getAuthErrorMessage } from "../features/auth/authErrors";
+import type {SyntheticEvent, JSX } from "react";
+import { useAuth } from "../features/auth/Authenticator";
+import { getAuthErrorMessage } from "../features/auth/AuthErrors";
 import { useNavigate, Link } from "react-router-dom";
 
 function RegisterPage(): JSX.Element {
@@ -14,7 +14,7 @@ function RegisterPage(): JSX.Element {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     setError("");
     setSubmitting(true);
@@ -41,17 +41,23 @@ function RegisterPage(): JSX.Element {
     }
   }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Crear cuenta</h2>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
-      {error && <p role="alert">{error}</p>}
-      <button type="submit" disabled={submitting}>{submitting ? "Creando..." : "Registrarse"}</button>
-      <button type="button" onClick={handleGoogleRegister} disabled={submitting}>Registrarse con Google</button>
-      <p>¿Ya tenés cuenta? <Link to="/login">Iniciá sesión</Link></p>
-    </form>
-  );
+return (
+  <div className="app-shell">
+    <div className="auth-card">
+      <form onSubmit={handleSubmit} className="form-row">
+        <h2>Crear cuenta</h2>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
+        {error && <p className="alert-error" role="alert">{error}</p>}
+        <div className="task-actions">
+          <button type="submit" disabled={submitting}>{submitting ? "Creando..." : "Registrarse"}</button>
+          <button type="button" className="secondary" onClick={handleGoogleRegister} disabled={submitting}>Registrarse con Google</button>
+        </div>
+        <p className="muted">¿Ya tenés cuenta? <Link to="/login">Iniciá sesión</Link></p>
+      </form>
+    </div>
+  </div>
+);
 }
 
 export default RegisterPage;
